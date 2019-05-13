@@ -1,34 +1,53 @@
-/* How to Hook with Logos
-Hooks are written with syntax similar to that of an Objective-C @implementation.
-You don't need to #include <substrate.h>, it will be done automatically, as will
-the generation of a class list and an automatic constructor.
+%hook UILabel
 
-%hook ClassName
-
-// Hooking a class method
-+ (id)sharedInstance {
+-(id)font{
 	return %orig;
+	if ([[self text] isEqualToString:@"OPEN"]){
+		self.backgroundColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.25];
+	}
+	
 }
 
-// Hooking an instance method with an argument.
-- (void)messageName:(int)argument {
-	%log; // Write a message about this call, including its class, name and arguments, to the system log.
-
-	%orig; // Call through to the original function with its original arguments.
-	%orig(nil); // Call through to the original function with a custom argument.
-
-	// If you use %orig(), you MUST supply all arguments (except for self and _cmd, the automatically generated ones.)
+-(id)initWithCoder:(id)arg1{
+	return %orig;
+	if ([[self text] isEqualToString:@"OPEN"]){
+		self.backgroundColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.25];
+	}
 }
 
-// Hooking an instance method with no arguments.
-- (id)noArguments {
-	%log;
-	id awesome = %orig;
-	[awesome doSomethingElse];
-
-	return awesome;
+-(id)initWithFrame:(CGRect)arg1{
+	return %orig;
+	if ([[self text] isEqualToString:@"OPEN"]){
+		self.backgroundColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.25];
+	}
 }
 
-// Always make sure you clean up after yourself; Not doing so could have grave consequences!
+-(void)setFont:(id)arg1{
+	%orig;
+	if ([[self text] isEqualToString:@"OPEN"]){
+		self.backgroundColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.25];
+	}
+}
+
+-(void)setWantsFastBaselineMeasurement:(BOOL)arg1{
+	%orig;
+	if ([[self text] isEqualToString:@"OPEN"]){
+		self.backgroundColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.25];
+	}
+}
+
+-(void)traitCollectionDidChange:(id)arg1{
+	%orig;
+	if ([[self text] isEqualToString:@"OPEN"]){
+		self.backgroundColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.25];
+	}
+}
+
+-(BOOL)wantsFastBaselineMeasurement{
+	return %orig;
+	if ([[self text] isEqualToString:@"OPEN"]){
+		self.backgroundColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.25];
+	}
+}
+
 %end
-*/
