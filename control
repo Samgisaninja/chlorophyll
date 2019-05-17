@@ -4,6 +4,6 @@ Depends: mobilesubstrate
 Version: 1.1
 Architecture: iphoneos-arm
 Description: Highlight downloaded items in app store!
-Maintainer: Samg_is_a_Ninja
+Maintainer: Samg_is_a_Ninja & calicocat
 Author: Samg_is_a_Ninja
 Section: Tweaks
